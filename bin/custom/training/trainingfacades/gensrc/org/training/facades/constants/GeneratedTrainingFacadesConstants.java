@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Nov 14, 2022, 11:25:27 AM                   ---
+ * --- Generated at Nov 20, 2022, 8:12:34 AM                    ---
  * ----------------------------------------------------------------
  */
 package org.training.facades.constants;

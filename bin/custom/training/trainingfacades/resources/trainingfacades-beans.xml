@@ -12,4 +12,44 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+
+	<bean class="org.training.facades.student.data.StudentData">
+		<property name="id" type="String"/>
+		<property name="fullName" type="String"/>
+		<property name="phonNumber" type="String"/>
+		<property name="book" type="java.util.List&lt;org.training.facades.book.data.BookData>"/>
+	</bean>
+
+	<bean class="org.training.facades.book.data.BookData">
+		<property name="id" type="String"/>
+		<property name="title" type="String"/>
+		<property name="image" type="String"/>
+		<property name="genre" type="String"/>
+		<property name="student" type="org.training.facades.student.data.StudentData"/>
+	</bean>
+
+	<!--District data-->
+
+	<bean class="org.training.facades.district.data.DistrictData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<!--city data-->
+
+	<bean class="org.training.facades.city.data.CityData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="districts" type="org.training.facades.district.data.DistrictData"/>
+	</bean>
+
+	<!--Province data-->
+
+	<bean class="org.training.facades.province.data.ProvinceData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="cities" type="org.training.facades.city.data.CityData"/>
+	</bean>
+
+
 </beans>

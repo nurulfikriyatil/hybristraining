@@ -4,8 +4,8 @@
 # ImpEx for Importing Products
 
 # Macros / Replacement Parameter definitions
-$productCatalog=__PRODUCT_CATALOG_NAME__
-$productCatalogName=__PRODUCT_CATALOG_FULL_NAME__
+$productCatalog=trainingProductCatalog
+$productCatalogName=Training Product Catalog
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $supercategories=supercategories(code, $catalogVersion)
@@ -13,4 +13,15 @@ $baseProduct=baseProduct(code,$catalogVersion)
 $approved=approvalstatus(code)[default='check']
 
 # Insert Products
-INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+INSERT_UPDATE Product;code[unique=true];name;$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+INSERT_UPDATE Product; code[unique=true];name;
+;supplier1;supplier1;
+
+INSERT_UPDATE TrainingProduct; code[unique=true];name;$supercategories;variantType()[default='TrainingVariantProduct'];$approved; unit()[default=pieces]; $catalogVersion
+; PULLNBEAR; Pull & Bear; "SHIRT" ;;;;
+; CONVERSE  ; Converse; "SHIRT" ;;;;
+; HURLEY; Horley; "SHIRT" ;;;;
+; COLE; Cole; "Trouser" ;;;;
+
+INSERT_UPDATE TrainingVariantProduct; $baseProduct; code[unique=true];sku;material;unit(code)[default=pieces];$approved; $catalogVersion; $supercategories; description
+; PULLNBEAR;PB-SHIRT-1;PBT1;Cotton;;;;"SHIRT"; Pull & Bear T-shirt;

@@ -4,14 +4,21 @@
 #
 # Import the Content Catalog
 #
+
 $contentCatalog=__CONTENT_CATALOG_NAME__
-$languages=ja,en,de,zh
+$productCatalog1=trainingProductCatalog
+$classificationCatalog=trainingClassificationCatalog
+$languages=en,id
+
+# Product catalog
+INSERT_UPDATE Catalog;id[unique=true];
+                     ;$productCatalog1
 
 # Content catalog for CMS contents
 INSERT_UPDATE ContentCatalog;id[unique=true]
 ;$contentCatalog
 
 # Catalog versions for content catalogs
-INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode)
-;$contentCatalog;Staged;false;$languages
-;$contentCatalog;Online;true;$languages
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isoCode);readPrincipals(uid)
+;$productCatalog1;Staged;false;$languages;employeegroup
+;$productCatalog1;Online;true;$languages;employeegroup

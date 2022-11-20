@@ -37,4 +37,42 @@
         <cms:component component="${feature}" element="div" class="yComponentWrapper"/>
     </cms:pageSlot>
 
+    <h1 style="text-align : center">Student List</h1>
+        <div class="container product-list-container">
+            <c:set var="count" value="1"/>
+            <c:forEach var="student" items="${studentList}">
+                <div class="base-product-container">
+                    <h3>
+                        <span>${count}.</span>
+                        ${student.fullName} (${student.id})
+                    </h3>
+                </div>
+                <c:set var="count" value="${count+1}"/>
+                <div class="variant-product-container">
+                    <table>
+                        <thead>
+                                <th></th>
+                                <th>Book ID</th>
+                                <th>Book Title</th>
+                                <th>Genre </th>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="book" items="${student.book}">
+                                <tr>
+                                    <td><img src="${book.image}" style="width: 200px"></td>
+                                    <td>${book.id}</td>
+                                    <td>${book.title}</td>
+                                    <td>
+
+                                            ${book.genre}<br>
+
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </c:forEach>
+        </div>
+
 </template:page>

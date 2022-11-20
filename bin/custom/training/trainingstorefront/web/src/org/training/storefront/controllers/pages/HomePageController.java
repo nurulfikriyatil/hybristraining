@@ -10,12 +10,23 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.training.core.book.dao.BookDao;
+import org.training.facades.book.BookFacade;
+import org.training.facades.book.data.BookData;
+import org.training.facades.student.StudentFacade;
+import org.training.facades.student.data.StudentData;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -28,6 +39,12 @@ public class HomePageController extends AbstractPageController
 	private static final String LOGOUT = "logout";
 	private static final String ACCOUNT_CONFIRMATION_SIGNOUT_TITLE = "account.confirmation.signout.title";
 	private static final String ACCOUNT_CONFIRMATION_CLOSE_TITLE = "account.confirmation.close.title";
+
+	@Resource(name = "defaultStudentFacade")
+	private StudentFacade studentFacade;
+
+	@Resource(name = "defaultBookFacade")
+	private BookFacade bookFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(@RequestParam(value = WebConstants.CLOSE_ACCOUNT, defaultValue = "false") final boolean closeAcc,
@@ -48,8 +65,36 @@ public class HomePageController extends AbstractPageController
 		storeCmsPageInModel(model, contentPage);
 		setUpMetaDataForContentPage(model, contentPage);
 		updatePageTitle(model, contentPage);
+		model.addAttribute("studentList", studentFacade.getAllStudent());
+		model.addAttribute("bookList", bookFacade.getAllBook());
 
 		return getViewForPage(model);
+	}
+
+	@GetMapping("/student")
+	public ResponseEntity<StudentData> getStudent (@RequestParam(value = "id", required = false) final String id,
+												   @RequestParam(value = "name", required = false) final String name){
+		if(StringUtils.isNotEmpty(id)){
+			StudentData studentData = studentFacade.getStudentById(id);
+			return  new ResponseEntity<>(studentData, HttpStatus.OK);
+		}
+		else {
+			StudentData studentData = studentFacade.getStudentByName(name);
+			return new ResponseEntity<>(studentData, HttpStatus.OK);
+		}
+	}
+
+	@GetMapping("/book")
+	public ResponseEntity<BookData> getBook (@RequestParam(value = "id", required = false) final String id,
+												@RequestParam(value = "title", required = false) final String title){
+		if(StringUtils.isNotEmpty(id)){
+			BookData bookData = bookFacade.getBookId(id);
+			return new ResponseEntity<>(bookData, HttpStatus.OK);
+		}
+		else {
+			BookData bookData = bookFacade.getBookByTitle(title);
+			return new ResponseEntity<>(bookData, HttpStatus.OK);
+		}
 	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)

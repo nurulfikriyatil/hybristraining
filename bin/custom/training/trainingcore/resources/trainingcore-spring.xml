@@ -538,4 +538,59 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+
+	<!--Student Interceptor-->
+	<bean id="studentInterceptor" class="org.training.core.student.interceptor.StudentInterceptor"></bean>
+
+	<bean id="studentInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="studentInterceptor"/>
+		<property name="typeCode" value="Student"/>
+	</bean>
+
+
+	<!--Book Dao-->
+	<alias name="defaultBookDao" alias="bookDao"/>
+	<bean id="defaultBookDao" class="org.training.core.book.dao.impl.DefaultBookDao"></bean>
+
+	<!--Book Service-->
+	<alias name="defaultBookService" alias="bookService"/>
+	<bean id="defaultBookService" class="org.training.core.book.service.impl.DefaultBookService"></bean>
+
+	<!--Student Dao-->
+	<alias name="defaultStudentDao" alias="studentDao"/>
+	<bean id="defaultStudentDao" class="org.training.core.student.dao.impl.DefaultStudentDao"></bean>
+
+	<!--Student Service-->
+	<alias name="defaultStudentService" alias="studentService"/>
+	<bean id="defaultStudentService" class="org.training.core.student.service.impl.DefaultStudentService"></bean>
+
+	<!--Province Dao-->
+	<alias name="defaultProvinceDao" alias="provinceDao"/>
+	<bean id="defaultProvinceDao" class="org.training.core.province.dao.impl.DefaultProvinceDao"/>
+
+	<!--Province Service-->
+	<alias name="defaultProvinceService" alias="provinceService"/>
+	<bean id="defaultProvinceService" class="org.training.core.province.service.impl.DefaultProvinceService"/>
+
+	<!--City Dao-->
+	<alias name="defaultCityDao" alias="cityDao"/>
+	<bean id="defaultCityDao" class="org.training.core.city.dao.impl.DefaultCityDao"/>
+
+	<!--City Service-->
+	<alias name="defaultCityService" alias="cityService"/>
+	<bean id="defaultCityService" class="org.training.core.city.service.impl.DefaultCityService"/>
+
+	<!--District Dao-->
+	<alias name="defaultDistrictDao" alias="districtDao"/>
+	<bean id="defaultDistrictDao" class="org.training.core.district.dao.impl.DefaultDistrictDao"/>
+
+	<!--Province Service-->
+	<alias name="defaultDistrictService" alias="districtService"/>
+	<bean id="defaultDistrictService" class="org.training.core.district.service.impl.DefaultDistrictService"/>
+
+
+
+
+
+
 </beans>

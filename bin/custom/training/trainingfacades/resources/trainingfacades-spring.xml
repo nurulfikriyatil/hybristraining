@@ -182,4 +182,56 @@
 	</bean>
 
 	<bean id="genderData" class="org.training.facades.product.data.GenderData" scope="prototype"/>
+
+	<alias name="studentPopulator" alias="studentPopulator"/>
+	<bean id="studentPopulator"
+		  class="org.training.facades.populators.StudentPopulator"
+		  parent="studentBasicPopulator"/>
+
+	<alias name="bookPopulator" alias="bookPopulator"/>
+	<bean id="bookPopulator"
+		  class="org.training.facades.populators.BookPopulator"/>
+
+	<alias name="studentBasicPopulator" alias="studentbBasicPopulator"/>
+	<bean id="studentBasicPopulator"
+		  class="org.training.facades.populators.StudentBasicPopulator"/>
+
+
+	<bean id="studentBasicConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.student.data.StudentData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="studentBasicPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="studentConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.student.data.StudentData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="studentPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="bookConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.book.data.BookData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="bookPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultStudentFacade" alias="defaultStudentFacade"/>
+	<bean id="defaultStudentFacade"
+		  class = "org.training.facades.student.impl.DefaultStudentFacade"/>
+
+	<alias name="defaultBookFacade" alias="defaultBookFacade"/>
+	<bean id="defaultBookFacade"
+		  class="org.training.facades.book.impl.DefaultBookFacade"/>
+
+
+
 </beans>
