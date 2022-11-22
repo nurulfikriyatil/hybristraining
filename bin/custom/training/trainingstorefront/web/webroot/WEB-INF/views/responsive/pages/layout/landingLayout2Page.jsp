@@ -59,7 +59,7 @@
                         <tbody>
                             <c:forEach var="book" items="${student.book}">
                                 <tr>
-                                    <td><img src="${book.image}" style="width: 200px"></td>
+                                    <td><img src="${resizerBookImg}${book.image}" ></td>
                                     <td>${book.id}</td>
                                     <td>${book.title}</td>
                                     <td>
@@ -74,5 +74,48 @@
                 </div>
             </c:forEach>
         </div>
+
+    <h2 style="text-align : center">District List</h2>
+        <div class="container product-list-container">
+            <c:set var="count" value="1"/>
+            <c:forEach var="district" items="${districtsList}">
+                <div class="base-product-container">
+                    <h3>
+                        <span>${count}.</span>
+                        ${district.code} (${district.name})
+                    </h3>
+                </div>
+                <c:set var="count" value="${count+1}"/>
+            </c:forEach>
+        </div>
+
+    <h2 style="text-align : center">City List</h2>
+        <div class="container product-list-container">
+            <c:set var="count" value="1"/>
+            <c:forEach var="city" items="${citiesList}">
+                <div class="base-product-container">
+                    <h3>
+                        <span>${count}.</span>
+                        ${city.code} (${city.name})
+                    </h3>
+                </div>
+                <c:set var="count" value="${count+1}"/>
+            </c:forEach>
+        </div>
+
+    <h2 style="text-align : center">Province List</h2>
+        <div class="container product-list-container">
+            <c:set var="count" value="1"/>
+            <c:forEach var="province" items="${provinceList}">
+                <div class="base-product-container">
+                    <h3>
+                        <span>${count}.</span>
+                        ${province.code} (${province.name})
+                    </h3>
+                </div>
+                <c:set var="count" value="${count+1}"/>
+            </c:forEach>
+        </div>
+
 
 </template:page>

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DefaultDistrictService implements DistrictService {
 
-    @Resource(name = "ditrictDao")
+    @Resource(name = "districtDao")
     private DistrictDao districtDao;
 
     @Override

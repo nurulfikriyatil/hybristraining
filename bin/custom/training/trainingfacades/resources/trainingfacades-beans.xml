@@ -28,27 +28,26 @@
 		<property name="student" type="org.training.facades.student.data.StudentData"/>
 	</bean>
 
-	<!--District data-->
-
-	<bean class="org.training.facades.district.data.DistrictData">
-		<property name="code" type="String"/>
-		<property name="name" type="String"/>
-	</bean>
-
-	<!--city data-->
-
-	<bean class="org.training.facades.city.data.CityData">
-		<property name="code" type="String"/>
-		<property name="name" type="String"/>
-		<property name="districts" type="org.training.facades.district.data.DistrictData"/>
-	</bean>
-
 	<!--Province data-->
-
 	<bean class="org.training.facades.province.data.ProvinceData">
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
-		<property name="cities" type="org.training.facades.city.data.CityData"/>
+		<property name="cities" type="java.util.List&lt;org.training.facades.city.data.CityData>"/>
+	</bean>
+
+	<!--city data-->
+	<bean class="org.training.facades.city.data.CityData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="province" type="org.training.facades.province.data.ProvinceData"/>
+		<property name="districts" type="java.util.List&lt;org.training.facades.district.data.DistrictData>"/>
+	</bean>
+
+	<!--District data-->
+	<bean class="org.training.facades.district.data.DistrictData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="city" type="org.training.facades.city.data.CityData"/>
 	</bean>
 
 

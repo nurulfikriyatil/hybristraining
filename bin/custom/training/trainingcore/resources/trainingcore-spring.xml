@@ -588,9 +588,7 @@
 	<alias name="defaultDistrictService" alias="districtService"/>
 	<bean id="defaultDistrictService" class="org.training.core.district.service.impl.DefaultDistrictService"/>
 
-
-
-
-
+	<bean id="trainingJobPerformable" class="org.training.core.job.TrainingJobPerformable"
+		  parent="abstractJobPerformable"></bean>
 
 </beans>

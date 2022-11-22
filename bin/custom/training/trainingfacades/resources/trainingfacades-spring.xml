@@ -233,5 +233,91 @@
 		  class="org.training.facades.book.impl.DefaultBookFacade"/>
 
 
+	<!--Province, city, district populator-->
+
+	<alias name="provincePopulator" alias="provincePopulator"/>
+	<bean id="provincePopulator"
+		  class="org.training.facades.populators.ProvincePopulator"
+		  parent="provinceBasicPopulator"/>
+
+	<alias name="cityPopulator" alias="cityPopulator"/>
+	<bean id="cityPopulator"
+		  class="org.training.facades.populators.CityPopulator"
+		  parent="cityBasicPopulator"/>
+
+	<alias name="districtPopulator" alias="districtPopulator"/>
+	<bean id="districtPopulator"
+		  class="org.training.facades.populators.DistrictPopulator "/>
+
+
+	<alias name="provinceBasicPopulator" alias="provinceBasicPopulator"/>
+	<bean id="provinceBasicPopulator"
+		  class="org.training.facades.populators.ProvinceBasicPopulator"/>
+
+	<alias name="cityBasicPopulator" alias="cityBasicPopulator"/>
+	<bean id="cityBasicPopulator"
+		  class="org.training.facades.populators.CityBasicPopulator"/>
+
+	<!--Province, City, District Converter-->
+
+	<bean id="provinceBasicConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.province.data.ProvinceData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="provinceBasicPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="cityBasicConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.city.data.CityData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="cityBasicPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="provinceConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.province.data.ProvinceData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="provincePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="cityConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.city.data.CityData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="cityPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="districtConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="org.training.facades.district.data.DistrictData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="districtPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<!--Province, City, District FACADE-->
+
+	<alias name="defaultProvinceFacade" alias="defaultProvinceFacade"/>
+	<bean id="defaultProvinceFacade"
+		  class = "org.training.facades.province.impl.DefaultProvinceFacade"/>
+
+	<alias name="defaultCityFacade" alias="defaultCityFacade"/>
+	<bean id="defaultCityFacade"
+		  class="org.training.facades.city.impl.DefaultCityFacade"/>
+
+	<alias name="defaultDistrictFacade" alias="defaultDistrictFacade"/>
+	<bean id="defaultDistrictFacade"
+		  class="org.training.facades.district.impl.DefaultDistrictFacade"/>
+
 
 </beans>
